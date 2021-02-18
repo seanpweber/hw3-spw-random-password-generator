@@ -18,6 +18,11 @@ var confirmLower;
 function generatePassword() {
   var confirmLength = (prompt("Please choose a length for your password by entering a number of characters from 8 to 128."));
 
+  //ends function if user clicks click cancel
+  while (confirmLength == null) {
+    return "";
+  }
+
   //if answer is outside of parameters
   while(confirmLength <= 7 || confirmLength >= 129) {
     alert("Length must be between 8 and 128 characters, please try again.");
@@ -27,44 +32,61 @@ function generatePassword() {
   //enter password length
   lengthConfirm = window.confirm("You chose " + confirmLength + " characters. Is this correct?");
 
-  //loop to check that password length is correct
-  while (lengthConfirm == false) {
+  //condition to check that password length is correct
+  if (lengthConfirm == false) {
     generatePassword();
+  } 
+  else {
+    confirmPrompts();
   }
 
   //prompts to confirm types of characters
-  confirmSpecialChar = confirm("Click ok to confirm you want symbols in your password.");
-  confirmNumber = confirm("Click ok to confirm you want numbers in your password.");
-  confirmUpper = confirm("Click ok to confirm you want uppercase letters in your password.");
-  confirmLower = confirm("Click ok to confirm you want lowercase letters in your password.");
-  
-
-  //loop in case no characters are chosen
-  while(confirmSpecialChar === false && confirmNumber === false && confirmUpper === false && confirmLower === false) {
-    alert("You must choose at least one type of characters");
+  function confirmPrompts() {
     confirmSpecialChar = confirm("Click ok to confirm you want symbols in your password.");
     confirmNumber = confirm("Click ok to confirm you want numbers in your password.");
     confirmUpper = confirm("Click ok to confirm you want uppercase letters in your password.");
     confirmLower = confirm("Click ok to confirm you want lowercase letters in your password.");
+    }
+
+  //loop in case no characters are chosen
+  while(confirmSpecialChar === false && confirmNumber === false && confirmUpper === false && confirmLower === false) {
+    alert("You must choose at least one type of characters");
+    confirmPrompts();
   }
 
   //empty array to fil with all possible characters from user selection
   var passwordCharacters = [];
+  var charConfirm = [];
 
   if (confirmSpecialChar) {
     passwordCharacters = (passwordCharacters + specialChar);
+    charConfirm = (charConfirm + "\nSymbols");
   }
   if (confirmNumber) {
     passwordCharacters = (passwordCharacters + number);
+    charConfirm = (charConfirm + "\nNumbers")
   }
   if (confirmUpper) {
     passwordCharacters = (passwordCharacters + alphaUpper);
+    charConfirm = (charConfirm + "\nUppercase letters")
   }
   if (confirmLower) {
     passwordCharacters = (passwordCharacters + alphaLower);
+    charConfirm = (charConfirm + "\nLowercase letters")
   }
 
-  console.log(passwordCharacters);
+  //prompt to make final confirmation that chosen parameters are correct
+  finalConfirm = confirm("You want a password with " + confirmLength + " characters, containing:\n" + charConfirm + "\n\nIs this correct?")
+
+  //start over if parameters are incorrect
+  while (finalConfirm == false) {
+    generatePassword();
+  }
+
+  console.log("%cChosen parameters:\n" + "%c" + confirmLength + " characters" + charConfirm, "color: green;", "color: rgb 192 192 192;");
+
+  //logs possible characters to console
+  console.log("%cPossible characters: " + "%c" + passwordCharacters, "color: green;", "color: rgb 192 192 192");
 
   //empty string for the generated characters to fill
   var randomPassword = "";
@@ -72,10 +94,7 @@ function generatePassword() {
   //for loop for randomization
   for (var i = 0; i < confirmLength; i++) {
     randomPassword = randomPassword + passwordCharacters[Math.floor(Math.random() * passwordCharacters.length)];
-    console.log(randomPassword);
     }
-
-  console.log("Thanks for stopping by :)");
 
   return randomPassword;
 }
@@ -87,6 +106,10 @@ function writePassword() {
 
   passwordText.value = password;  
 
+  //logs generated password
+  console.log("%cGenerated password: " + "%c" + password, "color: green;", "color: rgb 192 192 192");
+
+  console.log("Thanks for stopping by :)");
 }
 
 // Add event listener to generate button
