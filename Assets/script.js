@@ -2,10 +2,10 @@
 var generateBtn = document.querySelector("#generate");
 
 //arrays for different characters
-var number = ["0123456789"]
-var specialChar = ["!%&;*+-./<>?~{}[]()_"]
-var alphaLower = ["qwertyuiopasdfghjklzxcvbnm"]
-var alphaUpper = ["QWERTYUIOPASDFGHJKLZXCVBNM"]
+var number = ["0123456789"];
+var specialChar = ["!%&;*+-./<>?~{}[]()_"];
+var alphaLower = ["qwertyuiopasdfghjklzxcvbnm"];
+var alphaUpper = ["QWERTYUIOPASDFGHJKLZXCVBNM"];
 
 //character confirmation variables declaration
 var confirmLength = "";
@@ -54,30 +54,30 @@ function generatePassword() {
     confirmPrompts();
   }
 
-  //empty array to fill with all possible characters from user selection
+  //empty arrays to fill with possible characters from user selection
   var passwordCharacters = [];
   var charConfirm = [];
 
-  //sums together the possible characters from user selection
+  //statements to sum together the possible characters from user selection
   if (confirmSpecialChar) {
     passwordCharacters = (passwordCharacters + specialChar);
     charConfirm = (charConfirm + "\nSymbols");
   }
   if (confirmNumber) {
     passwordCharacters = (passwordCharacters + number);
-    charConfirm = (charConfirm + "\nNumbers")
+    charConfirm = (charConfirm + "\nNumbers");
   }
   if (confirmUpper) {
     passwordCharacters = (passwordCharacters + alphaUpper);
-    charConfirm = (charConfirm + "\nUppercase letters")
+    charConfirm = (charConfirm + "\nUppercase letters");
   }
   if (confirmLower) {
     passwordCharacters = (passwordCharacters + alphaLower);
-    charConfirm = (charConfirm + "\nLowercase letters")
+    charConfirm = (charConfirm + "\nLowercase letters");
   }
 
   //prompt to make final confirmation that chosen parameters are correct
-  finalConfirm = confirm("You want a password with " + confirmLength + " characters, containing:\n" + charConfirm + "\n\nIs this correct?")
+  finalConfirm = confirm("You want a password with " + confirmLength + " characters, containing:\n" + charConfirm + "\n\nIs this correct?");
 
   //start over if parameters are incorrect
   while (finalConfirm == false) {
@@ -93,7 +93,7 @@ function generatePassword() {
   //empty string for the generated characters to fill
   var randomPassword = "";
 
-  //for loop for randomization
+  //loop for randomization
   for (var i = 0; i < confirmLength; i++) {
     randomPassword = randomPassword + passwordCharacters[Math.floor(Math.random() * passwordCharacters.length)];
     }
