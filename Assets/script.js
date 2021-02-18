@@ -84,7 +84,7 @@ function generatePassword() {
     generatePassword();
   }
 
-  //logs parameters to console
+  //logs chosen parameters to console
   console.log("%cChosen parameters:\n" + "%c" + confirmLength + " characters" + charConfirm, "color: #bc67bd;", "color: #c0c0c0;");
 
   //logs possible characters to console
@@ -98,6 +98,7 @@ function generatePassword() {
     randomPassword = randomPassword + passwordCharacters[Math.floor(Math.random() * passwordCharacters.length)];
     }
 
+  //end function and output value for randomized password
   return randomPassword;
 }
 
@@ -108,7 +109,7 @@ function writePassword() {
 
   passwordText.value = password;  
 
-  //logs generated password
+  //logs generated password to console
   console.log("%cGenerated password: " + "%c" + password, "color: #bc67bd;", "color: #c0c0c0;");
 
   console.log("Thanks for stopping by :)");
