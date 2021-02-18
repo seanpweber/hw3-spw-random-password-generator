@@ -54,10 +54,11 @@ function generatePassword() {
     confirmPrompts();
   }
 
-  //empty array to fil with all possible characters from user selection
+  //empty array to fill with all possible characters from user selection
   var passwordCharacters = [];
   var charConfirm = [];
 
+  //sums together the possible characters from user selection
   if (confirmSpecialChar) {
     passwordCharacters = (passwordCharacters + specialChar);
     charConfirm = (charConfirm + "\nSymbols");
@@ -83,6 +84,7 @@ function generatePassword() {
     generatePassword();
   }
 
+  //logs parameters to console
   console.log("%cChosen parameters:\n" + "%c" + confirmLength + " characters" + charConfirm, "color: green;", "color: rgb 192 192 192;");
 
   //logs possible characters to console
